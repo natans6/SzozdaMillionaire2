@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
 public class Millionaire {
+    Player player = new Player("Nate");
     private int randomNumber;
+    private int j = 0;
     Scanner scanner = new Scanner(System.in);
     String questions [] = {"What is the capital of France?",
             "Which critically acclaimed and heavily influential Atlanta Rapper is currently being tried for A RICO case?",
@@ -67,6 +69,8 @@ public class Millionaire {
 
     String questionAnswers [] = {"A", "B", "B", "D", "A", "A", "A", "B", "B", "A", "A", "B", "C", "D", "B", "C", "B", "A", "C", "A", "C", "A", "D", "A", "B", "B", "B", "A", "C", "A"};
 
+    int moneyWon [] = {500, 1000, 2000, 3000, 5000, 7500, 10000, 15000, 25000, 50000, 75000, 150000, 250000, 500000, 1000000};
+
     // Constructor
     public Millionaire(){
         randomNumber = (int) (Math.random() * 30);
@@ -91,6 +95,10 @@ public class Millionaire {
         String letter = scanner.nextLine();
         if(letter.equals(getAnswer())){
             System.out.println("Congrats! That is correct!");
+            // increment money here
+            player.increaseMoney(moneyWon[j]);
+            j++;
+            System.out.println(player.getMoney());
             return true;
         } else{
             System.out.println("And that is the end for you today. Thank you for coming!");
@@ -120,8 +128,7 @@ public class Millionaire {
     }
 
     public void introduction(){
-        System.out.println("Welcome to 'Who Wants to Be a Millionaire!' This Java-based game will challenge you with a series of questions" +
-                "offering one lifeline to eliminate two options and boost your chances of answering correctly! Have fun!");
+        System.out.println("Welcome to 'Who Wants to Be a Millionaire!' This Java-based game will challenge you with a series of questions offering one lifeline to eliminate two options and boost your chances of answering correctly! Have fun!");
     }
 }
 
