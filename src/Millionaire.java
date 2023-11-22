@@ -87,7 +87,6 @@ public class Millionaire {
             }
             setRandomNumber(0);
         }
-
     }
 
     public boolean userAnswer(){
@@ -98,9 +97,10 @@ public class Millionaire {
             // increment money here
             player.increaseMoney(moneyWon[j]);
             j++;
-            System.out.println(player.getMoney());
+            System.out.println("You as of right now have $" + player.getMoney());
             return true;
         } else{
+            System.out.println("You could have kept a grand total of $" + player.getMoney());
             System.out.println("And that is the end for you today. Thank you for coming!");
             return false;
         }
