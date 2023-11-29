@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Millionaire {
+    String RESET = "\u001B[0m";
+    String GREEN = "\u001B[32m";
+    String RED = "\u001B[31m";
+    String YELLOW = "\u001B[33m";
     Player player = new Player("Nate");
     private int randomNumber;
     private int j = 0;
@@ -91,7 +95,7 @@ public class Millionaire {
         }
     }
     public void introduction(){
-        System.out.println("Welcome to 'Who Wants to Be a Millionaire!' This Java-based game will challenge you with a series of questions offering\n two lifeline to eliminate two options and boost your chances of answering correctly! Have fun!");
+        System.out.println(GREEN + "Welcome to 'Who Wants to Be a Millionaire!' This Java-based game will challenge you with a series of questions offering\ntwo lifeline to eliminate two options and boost your chances of answering correctly! Have fun!" + RESET);
     }
     public String getQuestion(){
         return questions[randomNumber];
@@ -111,15 +115,15 @@ public class Millionaire {
         System.out.print("What do you think is the answer to this question? ");
         String letter = scanner.nextLine();
         if(letter.equals(getAnswer())){
-            System.out.println("Congrats! That is correct!");
+            System.out.println(GREEN + "Congrats! That is correct!" + RESET);
             // increment money here
             player.increaseMoney(moneyWon[j]);
             j++;
             System.out.println("You as of right now have $" + player.getMoney());
             return true;
         } else{
-            System.out.println("You could have kept a grand total of $" + player.getMoney());
-            System.out.println("And that is the end for you today. Thank you for coming!");
+            System.out.println(YELLOW + "You could have kept a grand total of $" + player.getMoney() + RESET);
+            System.out.println(RED + "And that is the end for you today. Thank you for coming!" + RESET);
             return false;
         }
 
