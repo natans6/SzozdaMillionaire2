@@ -71,24 +71,42 @@ public class Millionaire {
 
     int moneyWon [] = {500, 1000, 2000, 3000, 5000, 7500, 10000, 15000, 25000, 50000, 75000, 150000, 250000, 500000, 1000000};
 
+    private String chosenNums = "";
+
     // Constructor
     public Millionaire(){
-        randomNumber = (int) (Math.random() * 30);
+
     }
 
     // Method that will run the other methods
     public void start(){
         introduction();
         for (int i = 1; i  <= 15; i++){
+            randomNumber = checkRandNum(30);
             printQuestionTotal();
             boolean answer = userAnswer();
             if (!answer){
                 break;
             }
-            setRandomNumber(0);
         }
     }
-
+    public void introduction(){
+        System.out.println("Welcome to 'Who Wants to Be a Millionaire!' This Java-based game will challenge you with a series of questions offering\n two lifeline to eliminate two options and boost your chances of answering correctly! Have fun!");
+    }
+    public String getQuestion(){
+        return questions[randomNumber];
+    }
+    public String getOptions(){
+        return questionOptions[randomNumber];
+    }
+    public String getAnswer(){
+        return questionAnswers[randomNumber];
+    }
+    public void printQuestionTotal(){
+        System.out.println("<------------------------------------------------------->");
+        System.out.println(getQuestion());
+        System.out.println(getOptions());
+    }
     public boolean userAnswer(){
         System.out.print("What do you think is the answer to this question? ");
         String letter = scanner.nextLine();
@@ -106,29 +124,23 @@ public class Millionaire {
         }
 
     }
-
-    public void printQuestionTotal(){
-        System.out.println("<------------------------------------------------------->");
-        System.out.println(getQuestion());
-        System.out.println(getOptions());
-    }
-    public String getQuestion(){
-        return questions[randomNumber];
-    }
-    public String getOptions(){
-        return questionOptions[randomNumber];
-    }
-    public String getAnswer(){
-        return questionAnswers[randomNumber];
-    }
-
-    public void setRandomNumber(int rand){
-        rand = (int) (Math.random() * 30);
-        randomNumber = rand;
+    public int checkRandNum(int max){
+        int num = (int) (Math.random()*max);
+        String randNum = " "  + num +  ", ";
+        if (!chosenNums.contains(randNum)){
+            chosenNums += randNum;
+            return num;
+        } else if (chosenNums.indexOf(randNum) > 0) {
+            int newRand = (int) (Math.random()*max);
+            while(chosenNums.contains(randNum)){
+                newRand = (int) (Math.random()*max);
+                randNum = " " + newRand + ", ";
+            }
+            chosenNums += randNum;
+            return newRand;
+        } else {
+            return 0;
+        }
     }
 
-    public void introduction(){
-        System.out.println("Welcome to 'Who Wants to Be a Millionaire!' This Java-based game will challenge you with a series of questions offering one lifeline to eliminate two options and boost your chances of answering correctly! Have fun!");
-    }
 }
-
